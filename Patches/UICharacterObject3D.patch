@@ -1,0 +1,49 @@
+diff --git a/code/Assets/3rd-Party/UIObject3D/Scripts/UIObject3D.cs b/code/Assets/3rd-Party/UIObject3D/Scripts/UIObject3D.cs
+index 9e7c986..5692616 100644
+--- a/code/Assets/3rd-Party/UIObject3D/Scripts/UIObject3D.cs
++++ b/code/Assets/3rd-Party/UIObject3D/Scripts/UIObject3D.cs
+@@ -300,7 +300,7 @@ namespace UI.ThreeDimensional
+         [NonSerialized]
+         private bool renderQueued = false;
+         [NonSerialized]
+-        private Bounds targetBounds;
++        protected Bounds targetBounds;
+ 
+         private static bool copyTextureSupportedPopulated = false;
+         private static bool _copyTextureSupported = false;
+@@ -422,7 +422,7 @@ namespace UI.ThreeDimensional
+         /// <summary>
+         /// Unity's 'OnEnable' method. Handles some initialization.
+         /// </summary>
+-        void OnEnable()
++        protected virtual void OnEnable()
+         {
+             // If Start hasn't been called yet, then this has been called too early.
+             // Start() will call this when it is time
+@@ -488,7 +488,7 @@ namespace UI.ThreeDimensional
+         /// <summary>
+         /// Unity's 'OnDisable' method. Used to clean up scene objects that are not needed when UIObject3D is disabled.
+         /// </summary>
+-        void OnDisable()
++        protected virtual void OnDisable()
+         {
+             //_enabled = false;
+ 
+@@ -842,7 +842,7 @@ namespace UI.ThreeDimensional
+             }
+         }
+ 
+-        private void SetupTarget()
++        protected virtual void SetupTarget()
+         {
+             if (_target == null)
+             {
+@@ -871,7 +871,7 @@ namespace UI.ThreeDimensional
+             UIObject3DTimer.AtEndOfFrame(() => UpdateDisplay(), this);
+         }
+ 
+-        private void UpdateTargetPositioningAndScale()
++        protected virtual void UpdateTargetPositioningAndScale()
+         {
+             if (_target == null) return;
+             var renderer = _target.GetComponentInChildren<Renderer>();
